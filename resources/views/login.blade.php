@@ -107,7 +107,7 @@
             @csrf
             <div class="mb-3 input-group-lg">
               <input type="email" name="email" class="form-control" placeholder="Enter email">
-			  <div class="text-danger text-center">  <small>@error('email')
+			  <div class="text-danger text-center ">  <small>@error('email')
 				{{$message}}
 			  @enderror</small></div>
             </div>

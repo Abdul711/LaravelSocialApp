@@ -22,7 +22,12 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+ public function getPostCountAttribute()
+{
+    return $this->posts()->count();
+}
 
+protected $appends = ['post_count'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -45,4 +50,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function posts()
+{
+    return $this->hasMany(Post::class);
+}
 }

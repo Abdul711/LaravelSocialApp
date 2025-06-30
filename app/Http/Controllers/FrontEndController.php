@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+
+class FrontEndController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+ 
+    protected $userId;
+   public  function __construct()
+     {
+        $this->userId=Auth::user()->id;
+     }
     public function index()
     {
-        //
+     
+      $posts=Post::where("user_id",$this->userId)->get();
+      $user=Auth::user();
+    
+       return view("welcome",["posts"=>$posts,'user'=>$user]);
     }
 
     /**

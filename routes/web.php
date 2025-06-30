@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+Route::get('/',[FrontEndController::class,"index"]);
 });
 Route::get("login",[AuthController::class,"login"]);
 Route::get("signup",[AuthController::class,"signup"]);
