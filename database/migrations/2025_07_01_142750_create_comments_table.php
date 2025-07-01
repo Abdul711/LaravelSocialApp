@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_settings', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-               $table->unsignedBigInteger("user_id");
+                 $table->unsignedBigInteger("user_id");
+                       $table->unsignedBigInteger("post_id");
+                       $table->string("comments_content")->nullable();
+               $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-             $table->boolean("only_friends_of_friends");
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('user_settings');
+        Schema::dropIfExists('comments');
     }
 };
