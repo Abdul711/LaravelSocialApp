@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fellowers', function (Blueprint $table) {
+        Schema::create('friendships', function (Blueprint $table) {
             $table->id();
                $table->unsignedBigInteger("user_id");
+               $table->unsignedBigInteger("friend_id");
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('friend_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fellowers');
+        Schema::dropIfExists('friendships');
     }
 };
