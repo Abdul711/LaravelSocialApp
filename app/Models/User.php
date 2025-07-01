@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -21,13 +21,30 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'pic'
     ];
+ 
  public function getPostCountAttribute()
 {
     return $this->posts()->count();
 }
-
-protected $appends = ['post_count'];
+public function getPicAttribute($value){
+      if($value=="" || $value==Null ){
+    
+    return "placeholder.jpg";
+      }else{
+        return $value;
+      }
+  
+}
+public function getTitleAttribute($value){
+   if($value=="" || $value ==null){
+    return "Influencer";
+   }else{
+   return Str::ucfirst($value);
+}
+}
+protected $appends = ['post_count','pic'];
     /**
      * The attributes that should be hidden for serialization.
      *

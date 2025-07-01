@@ -17,6 +17,9 @@ class AuthService
         public function register(array $data)
     {
         return $this->authRepo->register($data);
+    } 
+    public function logout(){
+        return $this->authRepo->logout();
     }
 
     public function login(array $credentials)

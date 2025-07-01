@@ -39,4 +39,10 @@ class AuthController extends Controller
         $user = $this->authService->register($request->validated());
         return redirect(url('login'));
     }
+    public function logout(){
+        if($this->authService->logout()){
+          return redirect(url('login'));
+        }
+    }
+
 }

@@ -349,7 +349,7 @@ Header START -->
 
 				<li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2" src="assets/images/avatar/07.jpg" alt="">
+						<img class="avatar-img rounded-2" src="{{asset('profilepic/'.Auth::user()->pic)}}" alt="">
 					</a>
 					<ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
 						<!-- Profile info -->
@@ -357,10 +357,10 @@ Header START -->
 							<div class="d-flex align-items-center position-relative">
 								<!-- Avatar -->
 								<div class="avatar me-3">
-									<img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
+									<img class="avatar-img rounded-circle" src="{{asset('profilepic/'.Auth::user()->pic)}}" alt="avatar">
 								</div>
 								<div>
-									<a class="h6 stretched-link" href="#">Lori Ferguson</a>
+									<a class="h6 stretched-link" href="#">{{Auth::user()->name}}</a>
 									<p class="small m-0">Web Developer</p>
 								</div>
 							</div>
@@ -379,7 +379,7 @@ Header START -->
 							</a> 
 						</li>
 						<li class="dropdown-divider"></li>
-						<li><a class="dropdown-item bg-danger-soft-hover" href="sign-in-advance.html"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
+						<li><a class="dropdown-item bg-danger-soft-hover" href="{{url('signout')}}"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
 						<li> <hr class="dropdown-divider"></li>
 						<!-- Dark mode options START -->
 						<li>
@@ -458,18 +458,18 @@ Header END -->
 										<div class="text-center">
 										<!-- Avatar -->
 										<div class="avatar avatar-lg mt-n5 mb-3">
-											<a href="{{asset('profilepic/'.$user->pic)}}"><img class="avatar-img rounded border border-white border-3" src="{{asset('profilepic/'.$user->pic)}}" alt=""></a>
+											<a href="{{asset('profilepic/'.Auth::user()->pic)}}"><img class="avatar-img rounded border border-white border-3" src="{{asset('profilepic/'.Auth::user()->pic)}}" alt=""></a>
 										</div>
 										<!-- Info -->
-										<h5 class="mb-0"> <a href="#!">{{$user->name}} </a> </h5>
-										<small>Web Developer at Webestica</small>
+										<h5 class="mb-0"> <a href="#!">{{Auth::user()->name}} </a> </h5>
+										<small>{{Auth::user()->title}}</small>
 										<p class="mt-3">I'd love to change the world, but they won’t give me the source code.</p>
 
 										<!-- User stat START -->
 										<div class="hstack gap-2 gap-xl-3 justify-content-center">
 											<!-- User stat item -->
 											<div>
-												<h6 class="mb-0">{{$user->postCount}}</h6>
+												<h6 class="mb-0">{{Auth::user()->postCount}}</h6>
 												<small>Post</small>
 											</div>
 											<!-- Divider -->
@@ -574,7 +574,7 @@ Header END -->
 					<div class="d-flex mb-3">
 						<!-- Avatar -->
 						<div class="avatar avatar-xs me-2">
-							<a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""> </a>
+							<a href="#"> <img class="avatar-img rounded-circle" src="{{asset('profilepic/'.Auth::user()->pic)}}" alt=""> </a>
 						</div>
 						<!-- Post input -->
 						<form class="w-100" method="POST">
