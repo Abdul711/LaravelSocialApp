@@ -70,7 +70,7 @@ class UserCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          */
         $this->crud->set('show.setFromDb', false);
-
+        $this->crud->addClause('where', 'role', '!=', 'admin');
 $this->crud->addColumn([
     'name'  => 'S.No',
     'label' => '#',
