@@ -2,30 +2,36 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 class User extends Authenticatable
 {
-    use CrudTrait;
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable , CrudTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
+public function getRowNumber()
+{
+    $page = request()->get('page', 1);
+    $perPage = request()->get('limit', config('backpack.crud.default_page_length', 25));
+    static $i = 1;
+    return (($page - 1) * $perPage) + $i++;
+}
     protected $fillable = [
         'name',
         'email',
         'password',
         'pic'
     ];
- 
+     
  public function getPostCountAttribute()
 {
     return $this->posts()->count();

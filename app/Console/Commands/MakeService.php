@@ -59,7 +59,7 @@ PHP;
         // Create the file
         File::put($serPath, $serviceStub);
 
-      $this->info('Just showing on CLI, not logging');
+          $this->info("Service Class created:Services/{$serviceClass}.php");
         return 0;
     }
 }

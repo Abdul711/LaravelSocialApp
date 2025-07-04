@@ -17,5 +17,6 @@ class PostService
     public function getPost(){
       return $this->postRepo->getPost();
     }
+   
 
 }

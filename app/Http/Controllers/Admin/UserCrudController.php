@@ -29,7 +29,9 @@ class UserCrudController extends CrudController
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('user', 'users');
+          
     }
+
 
     /**
      * Define what happens when the List operation is loaded.
@@ -37,14 +39,73 @@ class UserCrudController extends CrudController
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
+    protected function setupShowOperation()
+{
+    // Prevent auto-loading from DB
+    // $this->crud->set('show.setFromDb', false);
+      $this->crud->removeButton('show');   // removes "View"
+    $this->crud->removeButton('edit');   // removes "Edit"
+    $this->crud->removeButton('delete'); // removes "Delete"
+    $this->crud->removeAllButtons();
+ $this->crud->set('show.setFromDb', true); 
+    $this->crud->addColumn([
+    'name'   => 'pic', // name of the db column
+    'label'  => 'Photo', // table column heading
+    'type'   => 'image',
+    'prefix' => 'profilepic/', // relative to public/
+    'height' => '60px',
+    'width'  => '60px',
+        ],
+);
+
+   
+  
+}
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        // CRUD::setFromDb(); // set columns from db columns.
 
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
+        $this->crud->set('show.setFromDb', false);
+
+$this->crud->addColumn([
+    'name'  => 'S.No',
+    'label' => '#',
+    'type'  => 'model_function',
+    'function_name' => 'getRowNumber',
+    'orderable' => false,
+]);
+         $this->crud->addColumn([
+    'name'   => 'pic', // name of the db column
+    'label'  => 'Photo', // table column heading
+    'type'   => 'image',
+    'prefix' => 'profilepic/', // relative to public/
+    'height' => '60px',
+    'width'  => '60px',
+        ],
+);
+
+$this->crud->addColumns([
+    [
+        'name'  => 'name',
+        'label' => 'Name',
+        'type'  => 'text',
+    ],
+    [
+        'name'  => 'email',
+        'label' => 'Email',
+        'type'  => 'email',
+    ],
+    [
+        'name'  => 'created_at',
+        'label' => 'Created At',
+        'type'  => 'date',
+    ],
+]);
+
     }
 
     /**
