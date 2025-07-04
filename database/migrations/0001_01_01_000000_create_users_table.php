@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
               $table->string('pic')->nullable();;
               $table->string("title")->nullable();
+                   $table->string("role")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
