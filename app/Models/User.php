@@ -29,7 +29,9 @@ public function getRowNumber()
         'name',
         'email',
         'password',
-        'pic'
+        'pic',
+        'role',
+        'status'
     ];
      
  public function getPostCountAttribute()

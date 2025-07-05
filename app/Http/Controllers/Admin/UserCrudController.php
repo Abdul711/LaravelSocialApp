@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -29,6 +30,9 @@ class UserCrudController extends CrudController
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('user', 'users');
+        // User::saving(function ($model){
+
+        // });
           
     }
 
@@ -42,6 +46,7 @@ class UserCrudController extends CrudController
     protected function setupShowOperation()
 {
     // Prevent auto-loading from DB
+//   $this->crud->addClause('withCount', 'posts'); 
     // $this->crud->set('show.setFromDb', false);
       $this->crud->removeButton('show');   // removes "View"
     $this->crud->removeButton('edit');   // removes "Edit"
@@ -57,9 +62,36 @@ class UserCrudController extends CrudController
     'width'  => '60px',
         ],
 );
+      $this->crud->addColumn([
+       "name"=>"name",
+       "label"=>"User Name",
+       "type"=>"text"
 
-   
-  
+      ]);
+   $this->crud->addColumn([
+       "name"=>"email",
+       "label"=>"User Email",
+       "type"=>"email"
+
+      ]);
+
+      $this->crud->addColumn([
+       "name"=>"title",
+       "label"=>"Job Title",
+       "type"=>"text"
+      ]) ;  
+       
+        $this->crud->addColumn([
+       "name"=>"title",
+       "label"=>"Job Title",
+       "type"=>"text"
+      ]) ;  
+           $this->crud->addColumn([
+       "name"=>"postCount",
+       "label"=>"No Of Post",
+       "type"=>"number"
+      ]) ; 
+    //   postCount
 }
     protected function setupListOperation()
     {
@@ -69,6 +101,11 @@ class UserCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
+        //    $this->crud->denyAccess('create');
+
+    // Optional: Remove specific buttons from each row
+    $this->crud->removeButton('create'); // not necessary, but safe
+
         $this->crud->set('show.setFromDb', false);
         $this->crud->addClause('where', 'role', '!=', 'admin');
 $this->crud->addColumn([
@@ -99,10 +136,12 @@ $this->crud->addColumns([
         'label' => 'Email',
         'type'  => 'email',
     ],
+    
     [
         'name'  => 'created_at',
-        'label' => 'Created At',
+        'label' => 'Creation Date',
         'type'  => 'date',
+        
     ],
 ]);
 
