@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\UserStatus;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Http\Requests\LoginRequest;
@@ -31,7 +32,10 @@ class AuthController extends Controller
         if (!$user) {
          return redirect()->back()->with('error', 'Invalid credentials.');
         }
-
+       if ($user && $user->status === UserStatus::Blocked) {
+    return redirect()->back()->with('error', 'Your Account Is Blocked By Admin');
+}
+        
         return redirect(url('/'));
     }
         public function register(RegisterRequest $request)

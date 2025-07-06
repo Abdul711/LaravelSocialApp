@@ -20,6 +20,7 @@ return new class extends Migration
               $table->string('pic')->nullable();;
               $table->string("title")->nullable();
                    $table->string("role")->nullable();
+                   $table->string("status")->default("active");
             $table->rememberToken();
             $table->timestamps();
         });

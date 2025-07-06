@@ -22,6 +22,8 @@ Route::group([
     Route::crud('post', 'PostCrudController');
     Route::crud('fellower', 'FellowerCrudController');
     Route::crud('fellowing', 'FellowingCrudController');
+    Route::get('user/{id}/change-status', [\App\Http\Controllers\Admin\UserCrudController::class, 'changeStatus']);
+    Route::get('user/{id}/set-status/{status}', [\App\Http\Controllers\Admin\UserCrudController::class, 'setStatus']);
 }); // this should be the absolute last line of this file
 
 /**
