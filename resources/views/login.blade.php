@@ -100,6 +100,12 @@
         <!-- Sign in START -->
         <div class="card card-body text-center p-4 p-sm-5">
           <!-- Title -->
+		  @if(session('error'))
+       <div class="alert alert-danger alert-dismissible fade show" role="alert"  id="error-alert" >
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
           <h1 class="mb-2">Sign in</h1>
           <p class="mb-0">Don't have an account? Click here to<a href="{{url('signup')}}">  sign up</a></p>
           <!-- Form START -->
@@ -157,7 +163,16 @@ JS libraries, plugins and custom scripts -->
 
 <!-- Theme Functions -->
 <script src="{{asset('assets/js/functions.js')}}"></script>
-  
+    <script>
+        setTimeout(function () {
+            const alert = document.getElementById('error-alert');
+            if (alert) {
+                alert.style.transition = "opacity 0.5s ease";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500);
+            }
+        }, 5000); // 5 seconds
+    </script> 
 </body>
 
 <!-- Mirrored from social.webestica.com/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Jun 2025 13:23:34 GMT -->
